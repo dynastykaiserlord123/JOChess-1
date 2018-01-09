@@ -174,7 +174,7 @@ public class Moves extends AbstractTableModel
         boolean wasCastling = castlingMove != castling.none;
         String locMove = new String(begin.piece.symbol);
         
-        if( game.settings.upsideDown )
+        if(this.game.getActivePlayer().color == Player.colors.black)
         {
             locMove += Character.toString((char) ( ( Chessboard.bottom - begin.pozX) + 97));//add letter of Square from which move was made
             locMove += Integer.toString( begin.pozY + 1 );//add number of Square from which move was made
@@ -194,7 +194,7 @@ public class Moves extends AbstractTableModel
             locMove += "-";//normal move
         }
         
-        if ( game.settings.upsideDown )
+        if (this.game.getActivePlayer().color == Player.colors.black)
         {
             locMove += Character.toString((char) (( Chessboard.bottom - end.pozX) +  97));//add letter of Square to which move was made
             locMove += Integer.toString( end.pozY + 1 );//add number of Square to which move was made

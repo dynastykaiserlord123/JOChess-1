@@ -135,7 +135,7 @@ public class Pawn extends Piece
                 }
             }
 
-            if ((this.square.pozY == 1) || (this.square.pozY == 6))
+            if ((this.square.pozY == 6))
             {
                 sq1 = chessboard.squares[this.square.pozX][second];
                 if (sq1.piece == null)

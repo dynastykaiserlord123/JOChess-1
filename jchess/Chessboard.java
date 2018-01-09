@@ -384,6 +384,26 @@ public class Chessboard extends JPanel {
 				move(squares[7][begin.pozY], squares[end.pozX - 1][begin.pozY], false, false);
 				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.shortCastling;
+				Boolean track[][] = new Boolean[8][8];
+				for (int i = 0; i < 8; i++) {
+					for (int j = 0; j < 8; j++) {
+						if (track[i][j] == null) {
+							Piece piece = squares[i][j].piece;
+							if (squares[7 - i][7 - j].piece != null) {
+								squares[i][j].setPiece(squares[7 - i][7 - j].piece);
+							} else {
+								squares[i][j].piece = null;
+							}
+							if (piece != null) {
+								squares[7 - i][7 - j].setPiece(piece);
+							} else {
+								squares[7 - i][7 - j].piece = null;
+							}
+							track[7-i][7-j] = false;
+						}
+
+					}
+				}
 				// this.moves_history.addMove(tempBegin, tempEnd, clearForwardHistory,
 				// wasCastling, wasEnPassant);
 				// return;
@@ -391,6 +411,26 @@ public class Chessboard extends JPanel {
 				move(squares[0][begin.pozY], squares[end.pozX + 1][begin.pozY], false, false);
 				ifWasCastling = end.piece; // for undo
 				wasCastling = Moves.castling.longCastling;
+				Boolean track[][] = new Boolean[8][8];
+				for (int i = 0; i < 8; i++) {
+					for (int j = 0; j < 8; j++) {
+						if (track[i][j] == null) {
+							Piece piece = squares[i][j].piece;
+							if (squares[7 - i][7 - j].piece != null) {
+								squares[i][j].setPiece(squares[7 - i][7 - j].piece);
+							} else {
+								squares[i][j].piece = null;
+							}
+							if (piece != null) {
+								squares[7 - i][7 - j].setPiece(piece);
+							} else {
+								squares[7 - i][7 - j].piece = null;
+							}
+							track[7-i][7-j] = false;
+						}
+
+					}
+				}
 				// this.moves_history.addMove(tempBegin, tempEnd, clearForwardHistory,
 				// wasCastling, wasEnPassant);
 				// return;
@@ -501,7 +541,6 @@ public class Chessboard extends JPanel {
 
 			}
 		}
-
 	}/* endOf-move()- */
 
 	public boolean redo() {
@@ -542,6 +581,25 @@ public class Chessboard extends JPanel {
 
 	public synchronized boolean undo(boolean refresh) // undo last move
 	{
+		Boolean track[][] = new Boolean[8][8];
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (track[i][j] == null) {
+					Piece piece = squares[i][j].piece;
+					if (squares[7 - i][7 - j].piece != null) {
+						squares[i][j].setPiece(squares[7 - i][7 - j].piece);
+					} else {
+						squares[i][j].piece = null;
+					}
+					if (piece != null) {
+						squares[7 - i][7 - j].setPiece(piece);
+					} else {
+						squares[7 - i][7 - j].piece = null;
+					}
+					track[7-i][7-j] = false;
+				}
+			}
+		}
 		Move last = this.moves_history.undo();
 
 		if (last != null && last.getFrom() != null) {

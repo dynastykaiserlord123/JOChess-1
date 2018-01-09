@@ -154,23 +154,33 @@ public class King extends Piece {
 	public int isCheckmatedOrStalemated() {
 		/*
 		 * returns: 0-nothing, 1-checkmate, 2-stalemate
+		 * 
 		 */
-		if (this.allMoves().size() == 0) {
-			for (int i = 0; i < 8; ++i) {
-				for (int j = 0; j < 8; ++j) {
-					if (chessboard.squares[i][j].piece != null && chessboard.squares[i][j].piece.player == this.player
-							&& chessboard.squares[i][j].piece.allMoves().size() != 0) {
-						return 0;
+		int i = 0, j = 0;
+		try {
+			if (this.allMoves().size() == 0) {
+				for (i = 0; i < 8; i++) {
+					for (j = 0; j < 8; j++) {
+						if (chessboard.squares[i][j].piece != null) {
+							if (chessboard.squares[i][j].piece.player == this.player) {
+								if (chessboard.squares[i][j].piece.allMoves().size() != 0) {
+									return 0;
+								}
+							}
+						}
 					}
 				}
-			}
 
-			if (this.isChecked()) {
-				return 1;
+				if (this.isChecked()) {
+					return 1;
+				} else {
+					return 2;
+				}
 			} else {
-				return 2;
+				return 0;
 			}
-		} else {
+		} catch (Exception ex) {
+			System.out.println(chessboard.squares[i][j].piece.name + " on " + i + " " + j);
 			return 0;
 		}
 	}

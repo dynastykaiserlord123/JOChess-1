@@ -44,7 +44,7 @@ public class Player implements Serializable
         localUser, networkUser, computer
     }
     public playerTypes playerType;
-    boolean goDown;
+    //boolean goDown;
 
     public Player()
     {
@@ -54,7 +54,7 @@ public class Player implements Serializable
     {
         this.name = name;
         this.color = colors.valueOf(color);
-        this.goDown = false;
+        //this.goDown = false;
     }
 
     /** Method setting the players name

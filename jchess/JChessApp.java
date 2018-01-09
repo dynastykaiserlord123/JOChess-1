@@ -26,7 +26,8 @@ public class JChessApp extends SingleFrameApplication {
     /**
      * At startup create and show the main frame of the application.
      */
-    @Override protected void startup() {
+    @Override 
+    public void startup() {
         jcv = new JChessView(this);
         show(jcv);
     }
@@ -50,7 +51,7 @@ public class JChessApp extends SingleFrameApplication {
     /**
      * Main method launching the application.
      */
-    public static void main(String[] args) {
-        launch(JChessApp.class, args);
-    }
+//    public static void main(String[] args) {
+//        launch(JChessApp.class, args);
+//    }
 }

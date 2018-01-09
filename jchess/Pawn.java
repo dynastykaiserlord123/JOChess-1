@@ -105,11 +105,11 @@ public class Pawn extends Piece
         Square sq1;
         int first = this.square.pozY - 1;//number where to move
         int second = this.square.pozY - 2;//number where to move (only in first move)
-        if (this.player.goDown)
-        {//check if player "go" down or up
-            first = this.square.pozY + 1;//if yes, change value
-            second = this.square.pozY + 2;//if yes, change value
-        }
+//        if (this.player.goDown)
+//        {//check if player "go" down or up
+//            first = this.square.pozY - 1;//if yes, change value
+//            second = this.square.pozY - 2;//if yes, change value
+//        }
         if (this.isout(first, first))
         {//out of bounds protection
             return list;//return empty list
@@ -135,7 +135,7 @@ public class Pawn extends Piece
                 }
             }
 
-            if ((player.goDown && this.square.pozY == 1) || (!player.goDown && this.square.pozY == 6))
+            if ((this.square.pozY == 1) || (this.square.pozY == 6))
             {
                 sq1 = chessboard.squares[this.square.pozX][second];
                 if (sq1.piece == null)

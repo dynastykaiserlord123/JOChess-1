@@ -290,10 +290,10 @@ public class Moves extends AbstractTableModel
     public synchronized Move undo()
     {
         try
-        {
+        {    		
             Move last = this.moveBackStack.pop();
             if (last != null)
-            {
+            {            	
                 if( this.game.settings.gameType == Settings.gameTypes.local ) //moveForward / redo available only for local game
                 {
                     this.moveForwardStack.push(last);
@@ -317,6 +317,25 @@ public class Moves extends AbstractTableModel
                 }
                 this.move.remove(this.move.size() - 1);
                 this.enterBlack = !this.enterBlack;
+                Boolean track[][] = new Boolean[8][8];
+        		for (int i = 0; i < 8; i++) {
+        			for (int j = 0; j < 8; j++) {
+        				if (track[i][j] == null) {
+        					Piece piece = game.chessboard.squares[i][j].piece;
+        					if (game.chessboard.squares[7 - i][7 - j].piece != null) {
+        						game.chessboard.squares[i][j].setPiece(game.chessboard.squares[7 - i][7 - j].piece);
+        					} else {
+        						game.chessboard.squares[i][j].piece = null;
+        					}
+        					if (piece != null) {
+        						game.chessboard.squares[7 - i][7 - j].setPiece(piece);
+        					} else {
+        						game.chessboard.squares[7 - i][7 - j].piece = null;
+        					}
+        					track[7-i][7-j] = false;
+        				}
+        			}
+        		}
             }
             return last;
         }

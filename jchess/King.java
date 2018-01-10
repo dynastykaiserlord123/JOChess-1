@@ -164,6 +164,12 @@ public class King extends Piece {
 						if (chessboard.squares[i][j].piece != null) {
 							if (chessboard.squares[i][j].piece.player == this.player) {
 								if (chessboard.squares[i][j].piece.allMoves().size() != 0) {
+//									for(Object m:chessboard.squares[i][j].piece.allMoves()) {
+//										Square sq = (Square)m;
+//										System.out.println("The " + chessboard.squares[i][j].piece.name + " on " + i + " "
+//											+ j + " can be moved to "
+//											+ sq.pozX + " " + sq.pozY);
+//									}									
 									return 0;
 								}
 							}

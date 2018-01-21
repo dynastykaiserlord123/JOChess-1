@@ -375,12 +375,12 @@ public class Game extends JPanel implements MouseListener, ComponentListener
     
     public boolean undo()
     {
-        boolean status = false;
+        Boolean status = false;
         
         if( this.settings.gameType == Settings.gameTypes.local )
         {
             status = chessboard.undo();
-            if( status )
+            if( status || status == null)
             {
                 this.switchActive();
             }

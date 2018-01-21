@@ -570,18 +570,16 @@ public class Chessboard extends JPanel {
 				}
 				return true;
 			}
-
 		}
 		return false;
 	}
 
-	public boolean undo() {
+	public Boolean undo() {
 		return undo(true);
 	}
 
-	public synchronized boolean undo(boolean refresh) // undo last move
+	public synchronized Boolean undo(boolean refresh) // undo last move
 	{
-
 		Move last = this.moves_history.undo();
 
 		if (last != null && last.getFrom() != null) {
@@ -628,9 +626,11 @@ public class Chessboard extends JPanel {
 				if (oneMoveEarlier != null && oneMoveEarlier.wasPawnTwoFieldsMove()) {
 					Piece canBeTakenEnPassant = this.squares[oneMoveEarlier.getTo().pozX][oneMoveEarlier
 							.getTo().pozY].piece;
-					if (canBeTakenEnPassant.name.equals("Pawn")) {
-						this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
-					}
+					if(canBeTakenEnPassant != null) {
+						if (canBeTakenEnPassant.name.equals("Pawn")) {
+							this.twoSquareMovedPawn = (Pawn) canBeTakenEnPassant;
+						}
+					}					
 				}
 
 				if (taken != null && !last.wasEnPassant()) {
@@ -648,7 +648,7 @@ public class Chessboard extends JPanel {
 			} catch (java.lang.ArrayIndexOutOfBoundsException exc) {
 				return false;
 			} catch (java.lang.NullPointerException exc) {
-				return false;
+				return null;
 			}
 
 			return true;
